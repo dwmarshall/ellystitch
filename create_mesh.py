@@ -4,25 +4,28 @@ Creates a PNG image of a 40x40 mesh for embroidery.
 """
 
 from PIL import Image, ImageDraw
-import json
+import yaml
 import os
 
 
 def load_threads(threads_file):
     """
-    Load thread specifications from a JSON file.
+    Load thread specifications from a YAML file.
 
     Args:
-        threads_file: Path to JSON file containing thread definitions
+        threads_file: Path to YAML file containing thread definitions
 
     Returns:
-        List of thread dictionaries with 'color', 'start', and 'end' keys
+        List of thread dictionaries. Each thread can have:
+        - 'color': color name
+        - 'paths': list of dictionaries with 'start' and 'end' keys (new format)
+        - OR 'start' and 'end' keys directly (old format, for backward compatibility)
     """
     if not os.path.exists(threads_file):
         return []
 
     with open(threads_file, "r") as f:
-        data = json.load(f)
+        data = yaml.safe_load(f)
         return data.get("threads", [])
 
 
@@ -42,7 +45,7 @@ def create_embroidery_mesh(
         cell_size: Size of each cell in pixels (default: 20)
         line_width: Width of grid lines in pixels (default: 1)
         output_file: Output PNG filename
-        threads_file: Optional path to JSON file with thread specifications
+        threads_file: Optional path to YAML file with thread specifications
         thread_width: Width of thread lines in pixels (default: 3)
     """
     # Calculate image dimensions
@@ -98,20 +101,42 @@ def create_embroidery_mesh(
     # Draw each thread from center of start square to center of end square
     for thread in threads:
         color = thread.get("color", "black")
-        start = thread.get("start", [0, 0])
-        end = thread.get("end", [0, 0])
 
-        # Convert grid coordinates to pixel coordinates (center of each square)
-        start_x = padding + start[0] * cell_size + cell_size / 2
-        start_y = padding + start[1] * cell_size + cell_size / 2
-        end_x = padding + end[0] * cell_size + cell_size / 2
-        end_y = padding + end[1] * cell_size + cell_size / 2
+        # Support both old format (single start/end) and new format (paths list)
+        if "paths" in thread:
+            # New format: multiple paths per color
+            paths = thread.get("paths", [])
+            for path in paths:
+                start = path.get("start", [0, 0])
+                end = path.get("end", [0, 0])
 
-        draw.line(
-            [(start_x, start_y), (end_x, end_y)],
-            fill=color,
-            width=thread_width,
-        )
+                # Convert grid coordinates to pixel coordinates (center of each square)
+                start_x = padding + start[0] * cell_size + cell_size / 2
+                start_y = padding + start[1] * cell_size + cell_size / 2
+                end_x = padding + end[0] * cell_size + cell_size / 2
+                end_y = padding + end[1] * cell_size + cell_size / 2
+
+                draw.line(
+                    [(start_x, start_y), (end_x, end_y)],
+                    fill=color,
+                    width=thread_width,
+                )
+        else:
+            # Old format: single start/end (backward compatibility)
+            start = thread.get("start", [0, 0])
+            end = thread.get("end", [0, 0])
+
+            # Convert grid coordinates to pixel coordinates (center of each square)
+            start_x = padding + start[0] * cell_size + cell_size / 2
+            start_y = padding + start[1] * cell_size + cell_size / 2
+            end_x = padding + end[0] * cell_size + cell_size / 2
+            end_y = padding + end[1] * cell_size + cell_size / 2
+
+            draw.line(
+                [(start_x, start_y), (end_x, end_y)],
+                fill=color,
+                width=thread_width,
+            )
 
     # Save the image
     img.save(output_file, "PNG")
@@ -126,7 +151,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Create an embroidery mesh PNG image")
     parser.add_argument(
-        "--threads", "-t", type=str, help="JSON file with thread specifications"
+        "--threads", "-t", type=str, help="YAML file with thread specifications"
     )
     parser.add_argument(
         "--size", type=int, default=40, help="Number of cells per side (default: 40)"
