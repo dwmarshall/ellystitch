@@ -73,6 +73,7 @@ def create_embroidery_mesh(
     output_file="embroidery_mesh.png",
     threads_file=None,
     thread_width=3,
+    debug_overlay=False,
 ):
     """
     Create a PNG image of an embroidery mesh grid.
@@ -153,6 +154,74 @@ def create_embroidery_mesh(
                 fill="black",
             )
 
+    # Compute a single bounding box for all `skip` blocks and erase once.
+    skip_minx = skip_miny = None
+    skip_maxx = skip_maxy = None
+    skip_bbox = None
+    for thread in threads:
+        color_val = str(thread.get("color", "")).strip().lower()
+        if color_val != "skip":
+            continue
+        # Support both new and old formats
+        if "paths" in thread:
+            for path in thread.get("paths", []):
+                start = path.get("start", [0, 0])
+                end = path.get("end", [0, 0])
+                try:
+                    sx, sy = int(start[0]), int(start[1])
+                    ex, ey = int(end[0]), int(end[1])
+                except Exception:
+                    continue
+                if skip_minx is None:
+                    skip_minx = min(sx, ex)
+                    skip_maxx = max(sx, ex)
+                    skip_miny = min(sy, ey)
+                    skip_maxy = max(sy, ey)
+                else:
+                    skip_minx = min(skip_minx, sx, ex)
+                    skip_maxx = max(skip_maxx, sx, ex)
+                    skip_miny = min(skip_miny, sy, ey)
+                    skip_maxy = max(skip_maxy, sy, ey)
+        else:
+            start = thread.get("start", [0, 0])
+            end = thread.get("end", [0, 0])
+            try:
+                sx, sy = int(start[0]), int(start[1])
+                ex, ey = int(end[0]), int(end[1])
+            except Exception:
+                continue
+            if skip_minx is None:
+                skip_minx = min(sx, ex)
+                skip_maxx = max(sx, ex)
+                skip_miny = min(sy, ey)
+                skip_maxy = max(sy, ey)
+            else:
+                skip_minx = min(skip_minx, sx, ex)
+                skip_maxx = max(skip_maxx, sx, ex)
+                skip_miny = min(skip_miny, sy, ey)
+                skip_maxy = max(skip_maxy, sy, ey)
+
+    # If we found skip cells, shrink the block by one cell on each side
+    # (per your request) and erase the whole rectangle in one pass.
+    if skip_minx is not None:
+        # Erase the exact union bounding rectangle (no shrinking), then
+        # draw a black outline around the erased region so adjoining grid
+        # lines remain visible but the erased area is clearly marked.
+        left = padding + skip_minx * cell_size
+        top = padding + skip_miny * cell_size
+        right = padding + (skip_maxx + 1) * cell_size
+        bottom = padding + (skip_maxy + 1) * cell_size
+        # clamp to image bounds and convert to ints
+        left = int(max(0, left))
+        top = int(max(0, top))
+        right = int(min(img.width - 1, right))
+        bottom = int(min(img.height - 1, bottom))
+        if left <= right and top <= bottom:
+            # Erase now; remember the bbox so we can draw a visible outline
+            # after all threads are drawn (so the outline is on top).
+            draw.rectangle([(left, top), (right, bottom)], fill="white")
+            skip_bbox = (left, top, right, bottom)
+
     # Draw each thread from center of start square to center of end square
     for thread in threads:
         color = thread.get("color", "black")
@@ -164,6 +233,10 @@ def create_embroidery_mesh(
             for path in paths:
                 start = path.get("start", [0, 0])
                 end = path.get("end", [0, 0])
+
+                # Skip drawing per-path skip threads (we erased the union earlier)
+                if str(color).strip().lower() == "skip":
+                    continue
 
                 # Convert grid coordinates to pixel coordinates (center of each square)
                 start_x = padding + start[0] * cell_size + cell_size / 2
@@ -187,11 +260,25 @@ def create_embroidery_mesh(
             end_x = padding + end[0] * cell_size + cell_size / 2
             end_y = padding + end[1] * cell_size + cell_size / 2
 
+            # Skip drawing old-format skip threads (we erased the union earlier)
+            if str(color).strip().lower() == "skip":
+                continue
+
             draw.line(
                 [(start_x, start_y), (end_x, end_y)],
                 fill=color,
                 width=thread_width,
             )
+
+    # Draw black outline over erased bbox so it's visible on top of threads
+    if "skip_bbox" in locals() and skip_bbox is not None:
+        try:
+            l, t, r, b = skip_bbox
+            # Only draw debug overlay (red) if requested; do not draw black outline.
+            if debug_overlay:
+                draw.rectangle([(l, t), (r, b)], outline="red", width=2)
+        except Exception:
+            pass
 
     # Save the image
     img.save(output_file, "PNG")
@@ -233,6 +320,11 @@ if __name__ == "__main__":
         default=3,
         help="Width of thread lines in pixels (default: 3)",
     )
+    parser.add_argument(
+        "--debug-overlay",
+        action="store_true",
+        help="Draw red rectangles showing where skip erases occur",
+    )
 
     args = parser.parse_args()
 
@@ -243,5 +335,6 @@ if __name__ == "__main__":
         output_file=args.output,
         threads_file=args.threads,
         thread_width=args.thread_width,
+        debug_overlay=args.debug_overlay,
     )
     print(f"Mesh image saved as: {output}")

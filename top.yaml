@@ -14,14 +14,14 @@ colors:
   color26: &color26 grey
   color31: &color31 pink
   color32: &color32 pink
-  color33: &color33 black
-  color34: &color34 black
+  color33: &color33 skip
+  color34: &color34 skip
   color35: &color35 pink
   color36: &color36 grey
   color41: &color41 grey
   color42: &color42 pink
-  color43: &color43 black
-  color44: &color44 black
+  color43: &color43 skip
+  color44: &color44 skip
   color45: &color45 pink
   color46: &color46 pink
   color51: &color51 grey
