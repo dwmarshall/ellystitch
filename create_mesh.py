@@ -29,8 +29,45 @@ def load_threads(threads_file):
         return data.get("threads", [])
 
 
+def calculate_grid_size(threads):
+    """
+    Calculate the minimum grid size needed to contain all threads.
+
+    Args:
+        threads: List of thread dictionaries
+
+    Returns:
+        Tuple of (max_x, max_y) coordinates, or (40, 40) if no threads
+    """
+    if not threads:
+        return 40, 40
+
+    max_x = 0
+    max_y = 0
+
+    for thread in threads:
+        # Support both old format (single start/end) and new format (paths list)
+        if "paths" in thread:
+            # New format: multiple paths per color
+            paths = thread.get("paths", [])
+            for path in paths:
+                start = path.get("start", [0, 0])
+                end = path.get("end", [0, 0])
+                max_x = max(max_x, start[0], end[0])
+                max_y = max(max_y, start[1], end[1])
+        else:
+            # Old format: single start/end (backward compatibility)
+            start = thread.get("start", [0, 0])
+            end = thread.get("end", [0, 0])
+            max_x = max(max_x, start[0], end[0])
+            max_y = max(max_y, start[1], end[1])
+
+    # Add 1 to include the edge, and ensure minimum size
+    return max(max_x + 1, 1), max(max_y + 1, 1)
+
+
 def create_embroidery_mesh(
-    size=40,
+    size=None,
     cell_size=20,
     line_width=1,
     output_file="embroidery_mesh.png",
@@ -41,46 +78,69 @@ def create_embroidery_mesh(
     Create a PNG image of an embroidery mesh grid.
 
     Args:
-        size: Number of cells per side (default: 40)
+        size: Number of cells per side (default: None, auto-calculate from threads)
         cell_size: Size of each cell in pixels (default: 20)
         line_width: Width of grid lines in pixels (default: 1)
         output_file: Output PNG filename
         threads_file: Optional path to YAML file with thread specifications
         thread_width: Width of thread lines in pixels (default: 3)
     """
+    # Load threads first to calculate size if needed
+    threads = []
+    if threads_file:
+        threads = load_threads(threads_file)
+
+    # Calculate grid size from threads if not provided
+    if size is None:
+        if threads:
+            max_x, max_y = calculate_grid_size(threads)
+            # Use rectangular grid based on actual dimensions
+            width = max_x
+            height = max_y
+        else:
+            width = 40  # Default if no threads
+            height = 40
+    else:
+        # If size is provided, use it for both dimensions (square)
+        width = size
+        height = size
+
     # Calculate image dimensions
-    image_size = size * cell_size + 1  # +1 for the final line
+    image_width = width * cell_size + 1  # +1 for the final line
+    image_height = height * cell_size + 1
     padding = 20  # Padding around the grid
 
     # Create image with white background
     img = Image.new(
-        "RGB", (image_size + 2 * padding, image_size + 2 * padding), "white"
+        "RGB",
+        (image_width + 2 * padding, image_height + 2 * padding),
+        "white",
     )
     draw = ImageDraw.Draw(img)
 
     # Draw grid lines
-    for i in range(size + 1):
+    # Vertical lines
+    for i in range(width + 1):
         x = padding + i * cell_size
-        y = padding + i * cell_size
-
-        # Vertical lines
         draw.line(
-            [(x, padding), (x, padding + image_size - 1)],
+            [(x, padding), (x, padding + image_height - 1)],
             fill="black",
             width=line_width,
         )
 
-        # Horizontal lines
+    # Horizontal lines
+    for i in range(height + 1):
+        y = padding + i * cell_size
         draw.line(
-            [(padding, y), (padding + image_size - 1, y)],
+            [(padding, y), (padding + image_width - 1, y)],
             fill="black",
             width=line_width,
         )
 
     # Optionally mark intersection points (stitch points)
     point_radius = 1
-    for i in range(size + 1):
-        for j in range(size + 1):
+    for i in range(width + 1):
+        for j in range(height + 1):
             x = padding + i * cell_size
             y = padding + j * cell_size
             draw.ellipse(
@@ -92,11 +152,6 @@ def create_embroidery_mesh(
                 ],
                 fill="black",
             )
-
-    # Draw threads from file if provided
-    threads = []
-    if threads_file:
-        threads = load_threads(threads_file)
 
     # Draw each thread from center of start square to center of end square
     for thread in threads:
@@ -141,7 +196,7 @@ def create_embroidery_mesh(
     # Save the image
     img.save(output_file, "PNG")
     print(
-        f"Created {output_file} with {size}x{size} mesh ({image_size}x{image_size} pixels)"
+        f"Created {output_file} with {width}x{height} mesh ({image_width}x{image_height} pixels)"
     )
     return output_file
 
@@ -154,7 +209,10 @@ if __name__ == "__main__":
         "--threads", "-t", type=str, help="YAML file with thread specifications"
     )
     parser.add_argument(
-        "--size", type=int, default=40, help="Number of cells per side (default: 40)"
+        "--size",
+        type=int,
+        default=None,
+        help="Number of cells per side (default: auto-calculate from threads)",
     )
     parser.add_argument(
         "--cell-size",
