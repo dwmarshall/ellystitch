@@ -156,9 +156,36 @@ def create_embroidery_mesh(
                 fill="black",
             )
 
-    # French-knot drawing is performed after threads and skip erases
-    # so knots are not removed by erase rectangles. The drawing block
-    # is inserted later (after thread drawing) below.
+    # French-knot drawing: draw knots now (before skip erases) so they
+    # will be removed where skip regions exist. This places knots into
+    # the image first, then skip-area erases (below) will wipe them out
+    # where appropriate.
+    if french_knots_color:
+        try:
+            spacing = int(french_knot_spacing)
+            if spacing < 1:
+                spacing = 1
+        except Exception:
+            spacing = 1
+
+        # Use the same step formula as later behavior: step = spacing*2 - 2
+        step = max(1, spacing * 2 - 2)
+        start = max(0, spacing - 1)
+
+        knot_radius = max(1, int(cell_size * 0.48))
+        for i in range(start, width, step):
+            for j in range(start, height, step):
+                cx = padding + i * cell_size + cell_size / 2
+                cy = padding + j * cell_size + cell_size / 2
+                draw.ellipse(
+                    [
+                        cx - knot_radius,
+                        cy - knot_radius,
+                        cx + knot_radius,
+                        cy + knot_radius,
+                    ],
+                    fill=french_knots_color,
+                )
 
     # Compute a single bounding box for all `skip` blocks and erase once.
     skip_minx = skip_miny = None
@@ -286,37 +313,7 @@ def create_embroidery_mesh(
         except Exception:
             pass
 
-    # Draw french knots on top so they're visible and not erased by skip areas
-    if french_knots_color:
-        try:
-            spacing = int(french_knot_spacing)
-            if spacing < 1:
-                spacing = 1
-        except Exception:
-            spacing = 1
-
-        # Double the spacing between knots but subtract 2 so the gap becomes
-        # spacing*2 - 2. For spacing=6 this yields step=10 giving knots at
-        # user squares 6,16,26... Map user 1-based cell coords to 0-based
-        # indices by starting at spacing-1.
-        step = max(1, spacing * 2 - 2)
-        start = max(0, spacing - 1)
-
-        knot_radius = max(1, int(cell_size * 0.48))
-        # Draw at cell centers so knot appears centered in the mesh square
-        for i in range(start, width, step):
-            for j in range(start, height, step):
-                cx = padding + i * cell_size + cell_size / 2
-                cy = padding + j * cell_size + cell_size / 2
-                draw.ellipse(
-                    [
-                        cx - knot_radius,
-                        cy - knot_radius,
-                        cx + knot_radius,
-                        cy + knot_radius,
-                    ],
-                    fill=french_knots_color,
-                )
+    # (french knots were drawn earlier, before skip erases)
 
     # Save the image
     img.save(output_file, "PNG")
