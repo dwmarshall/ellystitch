@@ -72,7 +72,7 @@ def create_embroidery_mesh(
     line_width=1,
     output_file="embroidery_mesh.png",
     threads_file=None,
-    thread_width=3,
+    thread_width=7,
     debug_overlay=False,
     french_knots_color=None,
     french_knot_spacing=1,

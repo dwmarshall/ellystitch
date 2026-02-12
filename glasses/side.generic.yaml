@@ -1,0 +1,654 @@
+# Color definitions - modify colors here to change all units
+colors:
+  # Row 1
+  color11: &color11 __COLOR1__
+  color12: &color12 __COLOR1__
+  color13: &color13 __COLOR1__
+  color14: &color14 __COLOR1__
+  # Row 2 (same as row 1)
+  color21: &color21 __COLOR1__
+  color22: &color22 __COLOR2__
+  color23: &color23 __COLOR2__
+  color24: &color24 __COLOR1__
+  # Row 3
+  color31: &color31 __COLOR1__
+  color32: &color32 __COLOR2__
+  color33: &color33 __COLOR2__
+  color34: &color34 __COLOR1__
+  # Row 4
+  color41: &color41 __COLOR1__
+  color42: &color42 __COLOR2__
+  color43: &color43 __COLOR2__
+  color44: &color44 __COLOR1__
+  # Row 5
+  color51: &color51 __COLOR1__
+  color52: &color52 __COLOR2__
+  color53: &color53 __COLOR2__
+  color54: &color54 __COLOR1__
+  # Row 6
+  color61: &color61 __COLOR1__
+  color62: &color62 __COLOR2__
+  color63: &color63 __COLOR2__
+  color64: &color64 __COLOR1__
+  # Row 7
+  color71: &color71 __COLOR1__
+  color72: &color72 __COLOR1__
+  color73: &color73 __COLOR1__
+  color74: &color74 __COLOR1__
+
+threads:
+  # Unit 1,1 (top-left)
+  - color: *color11
+    paths:
+      - start: [0, 1]
+        end: [1, 0]
+      - start: [0, 2]
+        end: [2, 0]
+      - start: [0, 3]
+        end: [3, 0]
+      - start: [0, 4]
+        end: [4, 0]
+      - start: [0, 5]
+        end: [5, 0]
+      - start: [1, 5]
+        end: [5, 1]
+      - start: [2, 5]
+        end: [5, 2]
+      - start: [3, 5]
+        end: [5, 3]
+      - start: [4, 5]
+        end: [5, 4]
+  # Unit 2,1 (top-col-2)
+  - color: *color12
+    paths:
+      # Threads (translated +5 in x)
+      - start: [10, 1]
+        end: [9, 0]
+      - start: [10, 2]
+        end: [8, 0]
+      - start: [10, 3]
+        end: [7, 0]
+      - start: [10, 4]
+        end: [6, 0]
+      - start: [10, 5]
+        end: [5, 0]
+      - start: [9, 5]
+        end: [5, 1]
+      - start: [8, 5]
+        end: [5, 2]
+      - start: [7, 5]
+        end: [5, 3]
+      - start: [6, 5]
+        end: [5, 4]
+  # Unit 3,1 (top-middle)
+  - color: *color13
+    paths:
+      # Threads (translated +10 in x)
+      - start: [10, 1]
+        end: [11, 0]
+      - start: [10, 2]
+        end: [12, 0]
+      - start: [10, 3]
+        end: [13, 0]
+      - start: [10, 4]
+        end: [14, 0]
+      - start: [10, 5]
+        end: [15, 0]
+      - start: [11, 5]
+        end: [15, 1]
+      - start: [12, 5]
+        end: [15, 2]
+      - start: [13, 5]
+        end: [15, 3]
+      - start: [14, 5]
+        end: [15, 4]
+  # Unit 4,1 (top-middle)
+  - color: *color14
+    paths:
+      # Threads (translated +15 in x)
+      - start: [20, 1]
+        end: [19, 0]
+      - start: [20, 2]
+        end: [18, 0]
+      - start: [20, 3]
+        end: [17, 0]
+      - start: [20, 4]
+        end: [16, 0]
+      - start: [20, 5]
+        end: [15, 0]
+      - start: [19, 5]
+        end: [15, 1]
+      - start: [18, 5]
+        end: [15, 2]
+      - start: [17, 5]
+        end: [15, 3]
+      - start: [16, 5]
+        end: [15, 4]
+  # Unit 1,2 (second row, left)
+  - color: *color21
+    paths:
+      # Threads (translated +5 in y)
+      - start: [0, 9]
+        end: [1, 10]
+      - start: [0, 8]
+        end: [2, 10]
+      - start: [0, 7]
+        end: [3, 10]
+      - start: [0, 6]
+        end: [4, 10]
+      - start: [0, 5]
+        end: [5, 10]
+      - start: [1, 5]
+        end: [5, 9]
+      - start: [2, 5]
+        end: [5, 8]
+      - start: [3, 5]
+        end: [5, 7]
+      - start: [4, 5]
+        end: [5, 6]
+  # Unit 2,2 (second row, col-2)
+  - color: *color22
+    paths:
+      # Threads (translated +5 in x and +5 in y)
+      - start: [5, 6]
+        end: [6, 5]
+      - start: [5, 7]
+        end: [7, 5]
+      - start: [5, 8]
+        end: [8, 5]
+      - start: [5, 9]
+        end: [9, 5]
+      - start: [5, 10]
+        end: [10, 5]
+      - start: [6, 10]
+        end: [10, 6]
+      - start: [7, 10]
+        end: [10, 7]
+      - start: [8, 10]
+        end: [10, 8]
+      - start: [9, 10]
+        end: [10, 9]
+  # Unit 3,2 (second row, middle)
+  - color: *color23
+    paths:
+      # Threads (translated +10 in x and +5 in y)
+      - start: [10, 9]
+        end: [11, 10]
+      - start: [10, 8]
+        end: [12, 10]
+      - start: [10, 7]
+        end: [13, 10]
+      - start: [10, 6]
+        end: [14, 10]
+      - start: [10, 5]
+        end: [15, 10]
+      - start: [11, 5]
+        end: [15, 9]
+      - start: [12, 5]
+        end: [15, 8]
+      - start: [13, 5]
+        end: [15, 7]
+      - start: [14, 5]
+        end: [15, 6]
+  # Unit 4,2 (second row, middle)
+  - color: *color24
+    paths:
+      # Threads (translated +15 in x and +5 in y)
+      - start: [15, 6]
+        end: [16, 5]
+      - start: [15, 7]
+        end: [17, 5]
+      - start: [15, 8]
+        end: [18, 5]
+      - start: [15, 9]
+        end: [19, 5]
+      - start: [15, 10]
+        end: [20, 5]
+      - start: [16, 10]
+        end: [20, 6]
+      - start: [17, 10]
+        end: [20, 7]
+      - start: [18, 10]
+        end: [20, 8]
+      - start: [19, 10]
+        end: [20, 9]
+  # Unit 1,3 (third row, left)
+  - color: *color31
+    paths:
+      # Threads (translated +10 in y)
+      - start: [0, 11]
+        end: [1, 10]
+      - start: [0, 12]
+        end: [2, 10]
+      - start: [0, 13]
+        end: [3, 10]
+      - start: [0, 14]
+        end: [4, 10]
+      - start: [0, 15]
+        end: [5, 10]
+      - start: [1, 15]
+        end: [5, 11]
+      - start: [2, 15]
+        end: [5, 12]
+      - start: [3, 15]
+        end: [5, 13]
+      - start: [4, 15]
+        end: [5, 14]
+  # Unit 2,3 (third row, col-2)
+  - color: *color32
+    paths:
+      # Threads (translated +5 in x and +10 in y)
+      - start: [10, 11]
+        end: [9, 10]
+      - start: [10, 12]
+        end: [8, 10]
+      - start: [10, 13]
+        end: [7, 10]
+      - start: [10, 14]
+        end: [6, 10]
+      - start: [10, 15]
+        end: [5, 10]
+      - start: [9, 15]
+        end: [5, 11]
+      - start: [8, 15]
+        end: [5, 12]
+      - start: [7, 15]
+        end: [5, 13]
+      - start: [6, 15]
+        end: [5, 14]
+  # Unit 3,3 (third row, middle)
+  - color: *color33
+    paths:
+      # Threads (translated +10 in x and +10 in y)
+      - start: [10, 11]
+        end: [11, 10]
+      - start: [10, 12]
+        end: [12, 10]
+      - start: [10, 13]
+        end: [13, 10]
+      - start: [10, 14]
+        end: [14, 10]
+      - start: [10, 15]
+        end: [15, 10]
+      - start: [11, 15]
+        end: [15, 11]
+      - start: [12, 15]
+        end: [15, 12]
+      - start: [13, 15]
+        end: [15, 13]
+      - start: [14, 15]
+        end: [15, 14]
+  # Unit 4,3 (third row, middle)
+  - color: *color34
+    paths:
+      # Threads (translated +15 in x and +10 in y)
+      - start: [20, 11]
+        end: [19, 10]
+      - start: [20, 12]
+        end: [18, 10]
+      - start: [20, 13]
+        end: [17, 10]
+      - start: [20, 14]
+        end: [16, 10]
+      - start: [20, 15]
+        end: [15, 10]
+      - start: [19, 15]
+        end: [15, 11]
+      - start: [18, 15]
+        end: [15, 12]
+      - start: [17, 15]
+        end: [15, 13]
+      - start: [16, 15]
+        end: [15, 14]
+  # Unit 1,4 (fourth row, left)
+  - color: *color41
+    paths:
+      # Threads (translated +15 in y)
+      - start: [0, 19]
+        end: [1, 20]
+      - start: [0, 18]
+        end: [2, 20]
+      - start: [0, 17]
+        end: [3, 20]
+      - start: [0, 16]
+        end: [4, 20]
+      - start: [0, 15]
+        end: [5, 20]
+      - start: [1, 15]
+        end: [5, 19]
+      - start: [2, 15]
+        end: [5, 18]
+      - start: [3, 15]
+        end: [5, 17]
+      - start: [4, 15]
+        end: [5, 16]
+  # Unit 2,4 (fourth row, col-2)
+  - color: *color42
+    paths:
+      # Threads (translated +5 in x and +15 in y)
+      - start: [5, 16]
+        end: [6, 15]
+      - start: [5, 17]
+        end: [7, 15]
+      - start: [5, 18]
+        end: [8, 15]
+      - start: [5, 19]
+        end: [9, 15]
+      - start: [5, 20]
+        end: [10, 15]
+      - start: [6, 20]
+        end: [10, 16]
+      - start: [7, 20]
+        end: [10, 17]
+      - start: [8, 20]
+        end: [10, 18]
+      - start: [9, 20]
+        end: [10, 19]
+  # Unit 3,4 (fourth row, middle)
+  - color: *color43
+    paths:
+      # Threads (translated +10 in x and +15 in y)
+      - start: [10, 19]
+        end: [11, 20]
+      - start: [10, 18]
+        end: [12, 20]
+      - start: [10, 17]
+        end: [13, 20]
+      - start: [10, 16]
+        end: [14, 20]
+      - start: [10, 15]
+        end: [15, 20]
+      - start: [11, 15]
+        end: [15, 19]
+      - start: [12, 15]
+        end: [15, 18]
+      - start: [13, 15]
+        end: [15, 17]
+      - start: [14, 15]
+        end: [15, 16]
+  # Unit 4,4 (fourth row, middle)
+  - color: *color44
+    paths:
+      # Threads (translated +15 in x and +15 in y)
+      - start: [15, 16]
+        end: [16, 15]
+      - start: [15, 17]
+        end: [17, 15]
+      - start: [15, 18]
+        end: [18, 15]
+      - start: [15, 19]
+        end: [19, 15]
+      - start: [15, 20]
+        end: [20, 15]
+      - start: [16, 20]
+        end: [20, 16]
+      - start: [17, 20]
+        end: [20, 17]
+      - start: [18, 20]
+        end: [20, 18]
+      - start: [19, 20]
+        end: [20, 19]
+  # Unit 1,5 (fifth row, left)
+  - color: *color51
+    paths:
+      # Threads (translated +20 in y)
+      - start: [0, 21]
+        end: [1, 20]
+      - start: [0, 22]
+        end: [2, 20]
+      - start: [0, 23]
+        end: [3, 20]
+      - start: [0, 24]
+        end: [4, 20]
+      - start: [0, 25]
+        end: [5, 20]
+      - start: [1, 25]
+        end: [5, 21]
+      - start: [2, 25]
+        end: [5, 22]
+      - start: [3, 25]
+        end: [5, 23]
+      - start: [4, 25]
+        end: [5, 24]
+  # Unit 2,5 (fifth row, col-2)
+  - color: *color52
+    paths:
+      # Threads (translated +5 in x and +20 in y)
+      - start: [10, 21]
+        end: [9, 20]
+      - start: [10, 22]
+        end: [8, 20]
+      - start: [10, 23]
+        end: [7, 20]
+      - start: [10, 24]
+        end: [6, 20]
+      - start: [10, 25]
+        end: [5, 20]
+      - start: [9, 25]
+        end: [5, 21]
+      - start: [8, 25]
+        end: [5, 22]
+      - start: [7, 25]
+        end: [5, 23]
+      - start: [6, 25]
+        end: [5, 24]
+  # Unit 3,5 (fifth row, middle)
+  - color: *color53
+    paths:
+      # Threads (translated +10 in x and +20 in y)
+      - start: [10, 21]
+        end: [11, 20]
+      - start: [10, 22]
+        end: [12, 20]
+      - start: [10, 23]
+        end: [13, 20]
+      - start: [10, 24]
+        end: [14, 20]
+      - start: [10, 25]
+        end: [15, 20]
+      - start: [11, 25]
+        end: [15, 21]
+      - start: [12, 25]
+        end: [15, 22]
+      - start: [13, 25]
+        end: [15, 23]
+      - start: [14, 25]
+        end: [15, 24]
+  # Unit 4,5 (fifth row, middle)
+  - color: *color54
+    paths:
+      # Threads (translated +15 in x and +20 in y)
+      - start: [20, 21]
+        end: [19, 20]
+      - start: [20, 22]
+        end: [18, 20]
+      - start: [20, 23]
+        end: [17, 20]
+      - start: [20, 24]
+        end: [16, 20]
+      - start: [20, 25]
+        end: [15, 20]
+      - start: [19, 25]
+        end: [15, 21]
+      - start: [18, 25]
+        end: [15, 22]
+      - start: [17, 25]
+        end: [15, 23]
+      - start: [16, 25]
+        end: [15, 24]
+  # Unit 1,6 (sixth row, left)
+  - color: *color61
+    paths:
+      # Threads (translated +25 in y)
+      - start: [0, 29]
+        end: [1, 30]
+      - start: [0, 28]
+        end: [2, 30]
+      - start: [0, 27]
+        end: [3, 30]
+      - start: [0, 26]
+        end: [4, 30]
+      - start: [0, 25]
+        end: [5, 30]
+      - start: [1, 25]
+        end: [5, 29]
+      - start: [2, 25]
+        end: [5, 28]
+      - start: [3, 25]
+        end: [5, 27]
+      - start: [4, 25]
+        end: [5, 26]
+  # Unit 2,6 (sixth row, col-2)
+  - color: *color62
+    paths:
+      # Threads (translated +5 in x and +25 in y)
+      - start: [5, 26]
+        end: [6, 25]
+      - start: [5, 27]
+        end: [7, 25]
+      - start: [5, 28]
+        end: [8, 25]
+      - start: [5, 29]
+        end: [9, 25]
+      - start: [5, 30]
+        end: [10, 25]
+      - start: [6, 30]
+        end: [10, 26]
+      - start: [7, 30]
+        end: [10, 27]
+      - start: [8, 30]
+        end: [10, 28]
+      - start: [9, 30]
+        end: [10, 29]
+  # Unit 3,6 (sixth row, middle)
+  - color: *color63
+    paths:
+      # Threads (translated +10 in x and +25 in y)
+      - start: [10, 29]
+        end: [11, 30]
+      - start: [10, 28]
+        end: [12, 30]
+      - start: [10, 27]
+        end: [13, 30]
+      - start: [10, 26]
+        end: [14, 30]
+      - start: [10, 25]
+        end: [15, 30]
+      - start: [11, 25]
+        end: [15, 29]
+      - start: [12, 25]
+        end: [15, 28]
+      - start: [13, 25]
+        end: [15, 27]
+      - start: [14, 25]
+        end: [15, 26]
+  # Unit 4,6 (sixth row, middle)
+  - color: *color64
+    paths:
+      # Threads (translated +15 in x and +25 in y)
+      - start: [15, 26]
+        end: [16, 25]
+      - start: [15, 27]
+        end: [17, 25]
+      - start: [15, 28]
+        end: [18, 25]
+      - start: [15, 29]
+        end: [19, 25]
+      - start: [15, 30]
+        end: [20, 25]
+      - start: [16, 30]
+        end: [20, 26]
+      - start: [17, 30]
+        end: [20, 27]
+      - start: [18, 30]
+        end: [20, 28]
+      - start: [19, 30]
+        end: [20, 29]
+  # Unit 1,7 (seventh row, left)
+  - color: *color71
+    paths:
+      # Threads (translated +30 in y)
+      - start: [0, 31]
+        end: [1, 30]
+      - start: [0, 32]
+        end: [2, 30]
+      - start: [0, 33]
+        end: [3, 30]
+      - start: [0, 34]
+        end: [4, 30]
+      - start: [0, 35]
+        end: [5, 30]
+      - start: [1, 35]
+        end: [5, 31]
+      - start: [2, 35]
+        end: [5, 32]
+      - start: [3, 35]
+        end: [5, 33]
+      - start: [4, 35]
+        end: [5, 34]
+  # Unit 2,7 (seventh row, col-2)
+  - color: *color72
+    paths:
+      # Threads (translated +5 in x and +30 in y)
+      - start: [10, 31]
+        end: [9, 30]
+      - start: [10, 32]
+        end: [8, 30]
+      - start: [10, 33]
+        end: [7, 30]
+      - start: [10, 34]
+        end: [6, 30]
+      - start: [10, 35]
+        end: [5, 30]
+      - start: [9, 35]
+        end: [5, 31]
+      - start: [8, 35]
+        end: [5, 32]
+      - start: [7, 35]
+        end: [5, 33]
+      - start: [6, 35]
+        end: [5, 34]
+  # Unit 3,7 (seventh row, middle)
+  - color: *color73
+    paths:
+      # Threads (translated +10 in x and +30 in y)
+      - start: [10, 31]
+        end: [11, 30]
+      - start: [10, 32]
+        end: [12, 30]
+      - start: [10, 33]
+        end: [13, 30]
+      - start: [10, 34]
+        end: [14, 30]
+      - start: [10, 35]
+        end: [15, 30]
+      - start: [11, 35]
+        end: [15, 31]
+      - start: [12, 35]
+        end: [15, 32]
+      - start: [13, 35]
+        end: [15, 33]
+      - start: [14, 35]
+        end: [15, 34]
+  # Unit 4,7 (seventh row, middle)
+  - color: *color74
+    paths:
+      # Threads (translated +15 in x and +30 in y)
+      - start: [20, 31]
+        end: [19, 30]
+      - start: [20, 32]
+        end: [18, 30]
+      - start: [20, 33]
+        end: [17, 30]
+      - start: [20, 34]
+        end: [16, 30]
+      - start: [20, 35]
+        end: [15, 30]
+      - start: [19, 35]
+        end: [15, 31]
+      - start: [18, 35]
+        end: [15, 32]
+      - start: [17, 35]
+        end: [15, 33]
+      - start: [16, 35]
+        end: [15, 34]
