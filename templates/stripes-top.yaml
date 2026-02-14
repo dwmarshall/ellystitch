@@ -1,44 +1,44 @@
 # Color definitions - modify colors here to change all units
 colors:
-  color11: &color11 "__COLOR1__"
-  color12: &color12 "__COLOR2__"
-  color13: &color13 "__COLOR3__"
-  color14: &color14 "__COLOR4__"
-  color15: &color15 "__COLOR5__"
-  color16: &color16 "__COLOR6__"
+  color11: &color11 __COLOR1__
+  color12: &color12 __COLOR2__
+  color13: &color13 __COLOR3__
+  color14: &color14 __COLOR4__
+  color15: &color15 __COLOR5__
+  color16: &color16 __COLOR6__
   # Row 2 (same as row 1)
-  color21: &color21 "__COLOR1__"
-  color22: &color22 "__COLOR2__"
-  color23: &color23 "__COLOR3__"
-  color24: &color24 "__COLOR4__"
-  color25: &color25 "__COLOR5__"
-  color26: &color26 "__COLOR6__"
+  color21: &color21 __COLOR1__
+  color22: &color22 __COLOR2__
+  color23: &color23 __COLOR3__
+  color24: &color24 __COLOR4__
+  color25: &color25 __COLOR5__
+  color26: &color26 __COLOR6__
   # Row 3-4: blocks = [pink, grey, pink]
-  color31: &color31 "__COLOR1__"
-  color32: &color32 "__COLOR2__"
+  color31: &color31 __COLOR1__
+  color32: &color32 __COLOR2__
   color33: &color33 skip
   color34: &color34 skip
-  color35: &color35 "__COLOR5__"
-  color36: &color36 "__COLOR6__"
-  color41: &color41 "__COLOR1__"
-  color42: &color42 "__COLOR2__"
+  color35: &color35 __COLOR5__
+  color36: &color36 __COLOR6__
+  color41: &color41 __COLOR1__
+  color42: &color42 __COLOR2__
   color43: &color43 skip
   color44: &color44 skip
-  color45: &color45 "__COLOR5__"
-  color46: &color46 "__COLOR6__"
+  color45: &color45 __COLOR5__
+  color46: &color46 __COLOR6__
   # Row 5-6: same as row 1-2
-  color51: &color51 "__COLOR1__"
-  color52: &color52 "__COLOR2__"
-  color53: &color53 "__COLOR3__"
-  color54: &color54 "__COLOR4__"
-  color55: &color55 "__COLOR5__"
-  color56: &color56 "__COLOR6__"
-  color61: &color61 "__COLOR1__"
-  color62: &color62 "__COLOR2__"
-  color63: &color63 "__COLOR3__"
-  color64: &color64 "__COLOR4__"
-  color65: &color65 "__COLOR5__"
-  color66: &color66 "__COLOR6__"
+  color51: &color51 __COLOR1__
+  color52: &color52 __COLOR2__
+  color53: &color53 __COLOR3__
+  color54: &color54 __COLOR4__
+  color55: &color55 __COLOR5__
+  color56: &color56 __COLOR6__
+  color61: &color61 __COLOR1__
+  color62: &color62 __COLOR2__
+  color63: &color63 __COLOR3__
+  color64: &color64 __COLOR4__
+  color65: &color65 __COLOR5__
+  color66: &color66 __COLOR6__
 
 threads:
   # Unit 1,1 (top-left)
