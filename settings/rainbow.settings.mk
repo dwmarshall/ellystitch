@@ -1,4 +1,4 @@
-GENERIC = rainbow/side.generic.yaml
+GENERIC = templates/stripes-side.yaml
 
 COLOR1 ?= \#cc0033
 COLOR2 ?= \#f36a2f
