@@ -1,0 +1,2 @@
+COLOR1 ?= \#DC2626
+COLOR2 ?= \#F4C2C2
