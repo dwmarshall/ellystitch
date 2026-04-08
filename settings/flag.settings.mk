@@ -1,8 +1,8 @@
 GENERIC = templates/stripes-side.yaml
 
-COLOR1 ?= \#9fe2bf
+COLOR1 ?= \#c73a4a
 COLOR2 ?= \#b7b09d
-COLOR3 ?= \#f6d155
+COLOR3 ?= \#c73a4a
 COLOR4 ?= \#b7b09d
-COLOR5 ?= \#f4c2c2
-COLOR6 ?= \#9fe2bf
+COLOR5 ?= \#c73a4a
+COLOR6 ?= \#b7b09d
