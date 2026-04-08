@@ -6,6 +6,7 @@ Creates a PNG image of a 40x40 mesh for embroidery.
 from PIL import Image, ImageDraw
 import yaml
 import os
+import math
 
 
 def load_threads(threads_file):
@@ -62,8 +63,8 @@ def calculate_grid_size(threads):
             max_x = max(max_x, start[0], end[0])
             max_y = max(max_y, start[1], end[1])
 
-    # Add 1 to include the edge, and ensure minimum size
-    return max(max_x + 1, 1), max(max_y + 1, 1)
+    # Add 1 to include the edge, round up fractional extents, and ensure minimum size.
+    return max(math.ceil(max_x + 1), 1), max(math.ceil(max_y + 1), 1)
 
 
 def create_embroidery_mesh(
