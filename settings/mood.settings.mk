@@ -1,0 +1,2 @@
+COLOR1 ?= blue
+COLOR2 ?= \#9CAF88

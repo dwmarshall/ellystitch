@@ -1,0 +1,3 @@
+COLOR1 ?= \#E6C200
+COLOR2 ?= \#9CAF88
+COLOR3 ?= blue
