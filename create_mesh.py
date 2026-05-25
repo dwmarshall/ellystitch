@@ -329,7 +329,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Create an embroidery mesh PNG image")
     parser.add_argument(
-        "--threads", "-t", type=str, help="YAML file with thread specifications"
+        "--threads",
+        "--template",
+        "-t",
+        dest="threads_file",
+        type=str,
+        help="YAML file with thread/template specifications",
     )
     parser.add_argument(
         "--size",
@@ -381,7 +386,7 @@ if __name__ == "__main__":
         cell_size=args.cell_size,
         line_width=1,
         output_file=args.output,
-        threads_file=args.threads,
+        threads_file=args.threads_file,
         thread_width=args.thread_width,
         debug_overlay=args.debug_overlay,
         french_knots_color=args.french_knots,
