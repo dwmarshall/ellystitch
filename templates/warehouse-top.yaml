@@ -22,12 +22,12 @@ colors:
   color210: &color210 __COLOR1__
   color31: &color31 __COLOR1__
   color32: &color32 __COLOR2__
-  color33: &color33 __COLOR1__
-  color34: &color34 __COLOR2__
-  color35: &color35 __COLOR1__
-  color36: &color36 __COLOR2__
-  color37: &color37 __COLOR1__
-  color38: &color38 __COLOR2__
+  color33: &color33 skip
+  color34: &color34 skip
+  color35: &color35 skip
+  color36: &color36 skip
+  color37: &color37 skip
+  color38: &color38 skip
   color39: &color39 __COLOR1__
   color310: &color310 __COLOR2__
   color41: &color41 __COLOR2__
