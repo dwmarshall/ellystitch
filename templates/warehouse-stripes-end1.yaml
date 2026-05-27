@@ -1,29 +1,29 @@
 # Color definitions - modify colors here to change all units
 colors:
   color11: &color11 __COLOR1__
-  color12: &color12 __COLOR2__
+  color12: &color12 __COLOR1__
   color13: &color13 __COLOR1__
-  color14: &color14 __COLOR2__
+  color14: &color14 __COLOR1__
   color15: &color15 __COLOR1__
   color21: &color21 __COLOR2__
-  color22: &color22 __COLOR1__
+  color22: &color22 __COLOR2__
   color23: &color23 __COLOR2__
-  color24: &color24 __COLOR1__
+  color24: &color24 __COLOR2__
   color25: &color25 __COLOR2__
   color31: &color31 __COLOR1__
-  color32: &color32 __COLOR2__
+  color32: &color32 __COLOR1__
   color33: &color33 __COLOR1__
-  color34: &color34 __COLOR2__
+  color34: &color34 __COLOR1__
   color35: &color35 __COLOR1__
   color41: &color41 __COLOR2__
-  color42: &color42 __COLOR1__
+  color42: &color42 __COLOR2__
   color43: &color43 __COLOR2__
-  color44: &color44 __COLOR1__
+  color44: &color44 __COLOR2__
   color45: &color45 __COLOR2__
   color51: &color51 __COLOR1__
-  color52: &color52 __COLOR2__
+  color52: &color52 __COLOR1__
   color53: &color53 __COLOR1__
-  color54: &color54 __COLOR2__
+  color54: &color54 __COLOR1__
   color55: &color55 __COLOR1__
 
 threads:
@@ -93,7 +93,7 @@ threads:
       - start: [31.234835, 0.765165]
         end: [31.765165, 0.234835]
   # Left whip stitch row
-  - color: __COLOR3__
+  - color: __COLOR1__
     paths:
       - start: [0.234835, 0.234835]
         end: [0.765165, 0.765165]
@@ -109,6 +109,8 @@ threads:
         end: [0.765165, 5.765165]
       - start: [0.234835, 6.234835]
         end: [0.765165, 6.765165]
+  - color: __COLOR2__
+    paths:
       - start: [0.234835, 7.234835]
         end: [0.765165, 7.765165]
       - start: [0.234835, 8.234835]
@@ -121,6 +123,8 @@ threads:
         end: [0.765165, 11.765165]
       - start: [0.234835, 12.234835]
         end: [0.765165, 12.765165]
+  - color: __COLOR1__
+    paths:
       - start: [0.234835, 13.234835]
         end: [0.765165, 13.765165]
       - start: [0.234835, 14.234835]
@@ -133,6 +137,8 @@ threads:
         end: [0.765165, 17.765165]
       - start: [0.234835, 18.234835]
         end: [0.765165, 18.765165]
+  - color: __COLOR2__
+    paths:
       - start: [0.234835, 19.234835]
         end: [0.765165, 19.765165]
       - start: [0.234835, 20.234835]
@@ -145,6 +151,8 @@ threads:
         end: [0.765165, 23.765165]
       - start: [0.234835, 24.234835]
         end: [0.765165, 24.765165]
+  - color: __COLOR1__
+    paths:
       - start: [0.234835, 25.234835]
         end: [0.765165, 25.765165]
       - start: [0.234835, 26.234835]
@@ -158,7 +166,7 @@ threads:
       - start: [0.234835, 30.234835]
         end: [0.765165, 30.765165]
   # Right whip stitch row
-  - color: __COLOR3__
+  - color: __COLOR1__
     paths:
       - start: [31.234835, 1.234835]
         end: [31.765165, 1.765165]
@@ -172,6 +180,8 @@ threads:
         end: [31.765165, 5.765165]
       - start: [31.234835, 6.234835]
         end: [31.765165, 6.765165]
+  - color: __COLOR2__
+    paths:
       - start: [31.234835, 7.234835]
         end: [31.765165, 7.765165]
       - start: [31.234835, 8.234835]
@@ -184,6 +194,8 @@ threads:
         end: [31.765165, 11.765165]
       - start: [31.234835, 12.234835]
         end: [31.765165, 12.765165]
+  - color: __COLOR1__
+    paths:
       - start: [31.234835, 13.234835]
         end: [31.765165, 13.765165]
       - start: [31.234835, 14.234835]
@@ -196,6 +208,8 @@ threads:
         end: [31.765165, 17.765165]
       - start: [31.234835, 18.234835]
         end: [31.765165, 18.765165]
+  - color: __COLOR2__
+    paths:
       - start: [31.234835, 19.234835]
         end: [31.765165, 19.765165]
       - start: [31.234835, 20.234835]
@@ -208,6 +222,8 @@ threads:
         end: [31.765165, 23.765165]
       - start: [31.234835, 24.234835]
         end: [31.765165, 24.765165]
+  - color: __COLOR1__
+    paths:
       - start: [31.234835, 25.234835]
         end: [31.765165, 25.765165]
       - start: [31.234835, 26.234835]
@@ -220,8 +236,6 @@ threads:
         end: [31.765165, 29.765165]
       - start: [31.234835, 30.234835]
         end: [31.765165, 30.765165]
-      - start: [31.234835, 31.234835]
-        end: [31.765165, 31.765165]
   # Unit 1,1 (top-left)
   - color: *color11
     paths:
@@ -741,7 +755,7 @@ threads:
         end: [31, 21]
       - start: [30, 19]
         end: [31, 20]
-  # Unit 1,5 (bottom-left)
+  # Unit 1,5 (fifth row, left)
   - color: *color51
     paths:
       # Threads (translated +24 in y)
@@ -767,10 +781,10 @@ threads:
         end: [7, 29]
       - start: [6, 31]
         end: [7, 30]
-  # Unit 2,5 (bottom-col-2)
+  # Unit 2,5 (fifth row, col-2)
   - color: *color52
     paths:
-      # Threads (translated +24 in y)
+      # Threads (translated +6 in x and +24 in y)
       - start: [13, 26]
         end: [12, 25]
       - start: [13, 27]
@@ -793,10 +807,10 @@ threads:
         end: [7, 29]
       - start: [8, 31]
         end: [7, 30]
-  # Unit 3,5 (bottom-col-3)
+  # Unit 3,5 (fifth row, col-3)
   - color: *color53
     paths:
-      # Threads (translated +24 in y)
+      # Threads (translated +12 in x and +24 in y)
       - start: [13, 26]
         end: [14, 25]
       - start: [13, 27]
@@ -819,10 +833,10 @@ threads:
         end: [19, 29]
       - start: [18, 31]
         end: [19, 30]
-  # Unit 4,5 (bottom-col-4)
+  # Unit 4,5 (fifth row, col-4)
   - color: *color54
     paths:
-      # Threads (translated +24 in y)
+      # Threads (translated +18 in x and +24 in y)
       - start: [25, 26]
         end: [24, 25]
       - start: [25, 27]
@@ -845,10 +859,10 @@ threads:
         end: [19, 29]
       - start: [20, 31]
         end: [19, 30]
-  # Unit 5,5 (bottom-middle)
+  # Unit 5,5 (fifth row, middle)
   - color: *color55
     paths:
-      # Threads (translated +24 in y)
+      # Threads (translated +24 in x and +24 in y)
       - start: [25, 26]
         end: [26, 25]
       - start: [25, 27]
@@ -874,6 +888,8 @@ threads:
   # Bottom whip stitch row
   - color: __COLOR3__
     paths:
+      - start: [0.234835, 31.765165]
+        end: [0.765165, 31.234835]
       - start: [1.234835, 31.765165]
         end: [1.765165, 31.234835]
       - start: [2.234835, 31.765165]
@@ -934,5 +950,3 @@ threads:
         end: [29.765165, 31.234835]
       - start: [30.234835, 31.765165]
         end: [30.765165, 31.234835]
-      - start: [31.234835, 31.765165]
-        end: [31.765165, 31.234835]
